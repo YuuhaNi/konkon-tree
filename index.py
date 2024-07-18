@@ -45,39 +45,39 @@ requirements_path = os.path.join(output_dir, 'requirements_definition.md')
 with open(requirements_path, 'w', encoding='utf-8') as file:
     file.write(requirements_definition)
 
-# セクションごとに分割する関数
-def split_sections(md_content):
-    sections = []
-    current_section = []
-    for line in md_content.split('\n'):
-        if line.startswith('##### '):  # トップレベルの見出しでセクションを分ける
-            if current_section:
-                sections.append('\n'.join(current_section))
-                current_section = []
-        current_section.append(line)
-    if current_section:
-        sections.append('\n'.join(current_section))
-    return sections
+# # セクションごとに分割する関数
+# def split_sections(md_content):
+#     sections = []
+#     current_section = []
+#     for line in md_content.split('\n'):
+#         if line.startswith('##'):  # 見出しでセクションを分ける
+#             if current_section:
+#                 sections.append('\n'.join(current_section))
+#                 current_section = []
+#         current_section.append(line)
+#     if current_section:
+#         sections.append('\n'.join(current_section))
+#     return sections
 
-# セクションごとに分割
-sections = split_sections(requirements_definition)
+# # セクションごとに分割
+# sections = split_sections(requirements_definition)
 
-# 各セクションを適切なフォルダに保存
-current_folder = output_dir
+# # 各セクションを適切なフォルダに保存
+# current_folder = output_dir
 
-for section in sections:
-    # 最初の見出し行を取得
-    first_line = section.split('\n')[0]
-    if first_line.startswith('### '):
-        # トップレベルの見出しの場合、新しいフォルダを作成
-        current_folder = os.path.join(output_dir, re.sub(r'[^\w\s-]', '', first_line[4:].strip()).replace(' ', '_'))
-        os.makedirs(current_folder, exist_ok=True)
-    elif first_line.startswith('##### '):
-        # サブレベルの見出しの場合、ファイル名を生成
-        filename = re.sub(r'[^\w\s-]', '', first_line[5:].strip()).replace(' ', '_') + '.md'
-        file_path = os.path.join(current_folder, filename)
-        with open(file_path, 'w', encoding='utf-8') as file:
-            file.write(section)
+# for section in sections:
+#     # 最初の見出し行を取得
+#     first_line = section.split('\n')[0]
+#     if first_line.startswith('### '):
+#         # トップレベルの見出しの場合、新しいフォルダを作成
+#         current_folder = os.path.join(output_dir, re.sub(r'[^\w\s-]', '', first_line[4:].strip()).replace(' ', '_'))
+#         os.makedirs(current_folder, exist_ok=True)
+#     elif first_line.startswith('##### '):
+#         # サブレベルの見出しの場合、ファイル名を生成
+#         filename = re.sub(r'[^\w\s-]', '', first_line[5:].strip()).replace(' ', '_') + '.md'
+#         file_path = os.path.join(current_folder, filename)
+#         with open(file_path, 'w', encoding='utf-8') as file:
+#             file.write(section)
 
 print(f"要件定義書全体が{requirements_path}に保存されました。")
 print(f"各セクションが{output_dir}ディレクトリに保存されました。")
