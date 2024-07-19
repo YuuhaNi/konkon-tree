@@ -42,7 +42,7 @@ for combination in combinations:
         with open(file_path, 'r', encoding='utf-8') as file:
             combined_content += file.read() + "\n\n"
     
-    prompt = f"{filenames_in_prompt}を組み合わせて機能要求書を作成してください。\n\n{combined_content}"
+    prompt = f"{filenames_in_prompt}を参考にして機能要求書を作成してください。\n\n{combined_content}"
 
     # OpenAI APIを使って機能要求書を生成
     response = client.chat.completions.create(
