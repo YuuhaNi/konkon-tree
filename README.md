@@ -1,2 +1,3 @@
 # konkon-tree
 こんこんに関する内容をツリー状にする
+240726 Requirementsのフォルダは、Requirements_Phaseの内容をLLMに書かせてつくったのちに全探索でFR,NFRの作成を行っています。
