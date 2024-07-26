@@ -15,8 +15,8 @@ initial_proposal_path = os.path.join('Requirements_Phase', '01_Initial_Proposal_
 with open(initial_proposal_path, 'r', encoding='utf-8') as file:
     initial_proposal_content = file.read()
 
-# 要件定義書の構造を読み込む
-structure_path = 'Structure of requirements definition.md'
+# 構造を読み込む
+structure_path = '非機能要求構造.md'
 with open(structure_path, 'r', encoding='utf-8') as file:
     structure_content = file.read()
 
@@ -25,12 +25,12 @@ response = client.chat.completions.create(
     model="gpt-4o",
     messages=[
         {"role": "user", 
-        "content": f"あなたはプロのエンジニアです。次のシナリオから機能要件の全要素を詳細に記述し作成を行ってください。\n"
+        "content": f"あなたはプロのエンジニアです。次のシナリオから非機能要件の全要素を詳細に記述し作成を行ってください。\n"
                 f"内容はこれで開発を進めていくので構造・項目を参考にわかりやすく、省略せずに詳細に作成してください。\n"
                 f"シナリオ: {initial_proposal_content}\n"
                 f"要件定義書の構造: {structure_content}\n"
                 "図を作成する場合はPlantUMLで記述\n"
-                "参考文献はIEEE830です。"
+                "参考文献はIPAの非機能要求グレード 2018です。"
         }
     ]
 )
@@ -38,7 +38,7 @@ response = client.chat.completions.create(
 requirements_definition = response.choices[0].message.content
 
 # 要件定義書全体を保存する
-output_dir = 'Generated_Requirements'
+output_dir = 'Generated_NonRequirements'
 os.makedirs(output_dir, exist_ok=True)
 
 requirements_path = os.path.join(output_dir, 'requirements_definition.md')
